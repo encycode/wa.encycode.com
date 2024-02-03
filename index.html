@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Whats App Direct</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script>
+			$("document").ready(function(){
+				$("#mobile").keypress(function(event) { 
+					if (event.keyCode === 13) { 
+						$("#whatsapp").click(); 
+					} 
+				});
+				
+				$("#whatsapp").click(function(){
+					var mobile=$("#mobile").val().trim();
+					
+					if(validateMobile(mobile)){
+						window.location.href = 'https://api.whatsapp.com/send?phone=91'+mobile;
+					}else{
+						alert("Invalid Number");
+					}
+					
+				});
+				function validateMobile(value){
+					return value.match(/\d/g).length===10;
+				}
+			});
+		</script>
+		<style>
+			#error{
+				color:red;	
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h2>Whats App Direct</h2>
+			<div id="error" style="display:none"></div>
+			<div class="row">
+				<div class=" col-md-9 col-sm-9 col-xs-9">
+					<input type="number" class="form-control" pattern="[1-9]{1}[0-9]{9}" id="mobile" placeholder="Enter Mobile Number" value="" name="mobile" minlength="10" maxlength="10" size="10">
+				</div>
+				<div class="col-md-3 col-sm-3 col-xs-3">
+					<button type="button" id="whatsapp" class="col-md-4 btn btn-success">Go</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
